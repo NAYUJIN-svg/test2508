@@ -1,9 +1,27 @@
-function fibonacci(n) {
-    if (n <=1) return n;
-    return fibonacci(n - 1) + fibonacci(n - 2);
+$("header .nav>ul").hover(function () {
+    // over
+    $(this).find(".subMenu").stop().slideDown(800);;
+}, function () {
+    // out
+    $(".subMenu").stop().slideUp(300);
 }
+);
+var slide = $(".slideContent>img");
+var startCnt = 0;
+var endCnt = slide.length - 1;
 
-console.log(fibonacci(6));
+var timer = setInterval("autoSlide()", 3000);
 
-// fibonacci(5)=3 + fibonacci(4)=2 ===5
-// fibonacci(6) = (0,1,1,2,3,5,8)
+function autoSlide() {
+    $(slide[startCnt]).stop().animate(
+        { top: "300px" }, 1000, function () {
+            $(this).css({ top: "-300px" });
+        }
+    );
+    startCnt++;
+    if (startCnt > endCnt) {
+        startCnt = 0;
+    }
+    $(slide[startCnt]).stop().animate(
+        { top: "0" }, 1000);
+}
